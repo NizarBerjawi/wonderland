@@ -1,0 +1,30 @@
+.testimonial-cms1 {
+    width: 100%;
+    margin: 0;
+    padding: 5px 0 0 0;
+    background: grey;
+}
+
+.testimonial-cms1 .cont_inner {
+    width: 33%;
+    margin-bottom: 5px;
+}
+
+.testimonial-cms1 .cms_img {
+    border: none;
+    margin-right: 0px;
+    width: 35px;
+    height: 35px;
+}
+
+.testimonial_cms1_img, .testimonial_cms2_img, .testimonial_cms3_img {
+    background: none;
+}
+
+.services-icon .fa {
+    font-size: 42px;
+}
+
+#tabs_info .nav-tabs > li > a {
+    padding: 7px;
+}
