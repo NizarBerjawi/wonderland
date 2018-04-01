@@ -23,6 +23,7 @@ $_['text_forgotten']                 = 'Forgotten Password';
 $_['text_your_details']              = 'Your Personal Details';
 $_['text_your_address']              = 'Your Address';
 $_['text_your_password']             = 'Your Password';
+$_['text_register']                  = 'Make it official';
 $_['text_agree']                     = 'I have read and agree to the <a href="%s" class="agree"><b>%s</b></a>';
 $_['text_address_new']               = 'I want to use a new address';
 $_['text_address_existing']          = 'I want to use an existing address';
@@ -65,8 +66,8 @@ $_['entry_postcode']                 = 'Post Code';
 $_['entry_city']                     = 'City';
 $_['entry_country']                  = 'Country';
 $_['entry_zone']                     = 'Region / State';
-$_['entry_newsletter']               = 'I wish to subscribe to the %s newsletter.';
-$_['entry_shipping'] 	             = 'My delivery and billing addresses are the same.';
+$_['entry_newsletter']               = 'Join our newsletter';
+$_['entry_shipping'] 	             = 'Deliver to the same address';
 
 // Error
 $_['error_warning']                  = 'There was a problem while trying to process your order! If the problem persists please try selecting a different payment method or you can contact the store owner by <a href="%s">clicking here</a>.';

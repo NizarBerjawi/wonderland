@@ -239,9 +239,12 @@ class ControllerCheckoutCheckout extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+		// Wonderland customization
+		$data['login'] = $this->load->controller('common/login');
+		$data['register'] = $this->load->controller('common/register');
+		$data['payment_address'] = $this->load->controller('common/payment_address');
+
 		$this->response->setOutput($this->load->view('checkout/cart', $data));
-
-
 
 		$this->load->language('checkout/checkout');
 
