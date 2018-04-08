@@ -10,6 +10,7 @@ class ControllerCheckoutRegister extends Controller {
 		$data['text_select'] = $this->language->get('text_select');
 		$data['text_none'] = $this->language->get('text_none');
 		$data['text_loading'] = $this->language->get('text_loading');
+		$data['text_register'] = $this->language->get('text_register');
 
 		$data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$data['entry_firstname'] = $this->language->get('entry_firstname');
@@ -98,7 +99,7 @@ class ControllerCheckoutRegister extends Controller {
 
 		$data['shipping_required'] = $this->cart->hasShipping();
 
-		$this->response->setOutput($this->load->view('checkout/register', $data));
+		return $this->load->view('checkout/register', $data);
 	}
 
 	public function save() {

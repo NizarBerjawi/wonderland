@@ -30,8 +30,7 @@ class ControllerCheckoutLogin extends Controller {
 		}
 
 		$data['forgotten'] = $this->url->link('account/forgotten', '', true);
-
-		$this->response->setOutput($this->load->view('checkout/login', $data));
+		return $this->load->view('checkout/login', $data);
 	}
 
 	public function save() {

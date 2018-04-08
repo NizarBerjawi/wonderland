@@ -21,54 +21,45 @@
         <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
             <h1><?php echo $heading_title; ?></h1>
 
-
+        <!--  Login Button and Login Modal -->
         <?php if (!$logged): ?>
-        <div class="col-sm-12 text-center">
-            <!-- <div class="panel-group checkout-action">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title"><?php echo $text_checkout_option; ?></h4>
-                    </div>
-                    <div class="panel" id="collapse-checkout-option">
-                        <div class="panel-body"> -->
-                            <?php echo $login; ?>
-                        <!-- </div>
-                    </div>
-                </div>
-            </div> -->
+        <div class="row text-center">
+            <?php echo $login; ?>
         </div>
         <?php endif; ?>
 
         <div class="col-sm-4">
             <div class="panel-group checkout-action">
-
-                <?php if (!$logged && $account != 'guest'): ?>
-
+                <!-- The user is checking out as a guest -->
+                <?php if (!$logged): ?>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 class="panel-title"><?php echo $text_checkout_account; ?></h4>
+                            <h4 class="panel-title"><?php echo $text_checkout_billing_delivery_address; ?></h4>
                         </div>
+
                         <div class="panel" id="collapse-payment-address">
                             <div class="panel-body">
                                 <?php echo $register; ?>
                             </div>
                         </div>
                     </div>
+                <?php endif; ?>
 
-                <?php else: ?>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><?php echo $text_checkout_payment_address; ?></h4>
-                        </div>
-                        <div class="panel" id="collapse-payment-address">
-                            <div class="panel-body">
-                                <?php echo $payment_address; ?>
-                            </div>
+                <!-- Deliver to a different address -->
+                <div class="panel panel-default shipping-address" style="display: none;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><?php echo $text_checkout_payment_address; ?></h4>
+                    </div>
+                    <div class="panel" id="collapse-payment-address">
+                        <div class="panel-body">
+                            <?php echo $payment_address; ?>
                         </div>
                     </div>
-                    
-                <?php endif; ?>
+                </div>
+
+
+
+
             </div>
         </div>
 
@@ -248,20 +239,20 @@ $(document).on('change', 'input[name=\'account\']', function() {
     });
     <?php } else { ?>
         $(document).ready(function() {
-            $.ajax({
-                url: 'index.php?route=checkout/payment_address',
-                dataType: 'html',
-                success: function(html) {
-                    $('#collapse-payment-address .panel-body').html(html);
-
-                    $('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_payment_address; ?> <i class="fa fa-caret-down"></i></a>');
-
-                    $('a[href=\'#collapse-payment-address\']').trigger('click');
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-            });
+            // $.ajax({
+            //     url: 'index.php?route=checkout/payment_address',
+            //     dataType: 'html',
+            //     success: function(html) {
+            //         $('#collapse-payment-address .panel-body').html(html);
+            //
+            //         $('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_payment_address; ?> <i class="fa fa-caret-down"></i></a>');
+            //
+            //         $('a[href=\'#collapse-payment-address\']').trigger('click');
+            //     },
+            //     error: function(xhr, ajaxOptions, thrownError) {
+            //         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            //     }
+            // });
         });
     <?php } ?>
 
@@ -553,6 +544,16 @@ $(document).on('change', 'input[name=\'account\']', function() {
                                 }
                             });
                         });
+
+                        // Display te shipping address form if the user unchecks "Deliver to the same address"
+                        $('#collapse-payment-address input[name=\'shipping_address\']').on('change', function() {
+                            if ($(this).is(':checked')) {
+                                $('.shipping-address').hide();
+                                return;
+                            }
+
+                            $('.shipping-address').show();
+                        })
 
                         // Shipping Address
                         $(document).delegate('#button-shipping-address', 'click', function() {

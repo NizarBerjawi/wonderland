@@ -1,7 +1,6 @@
 <div class="row">
     <div class="col-sm-12">
         <fieldset id="account">
-            <!-- <legend><?php //echo $text_your_details; ?></legend> -->
             <div class="form-group" style="display: <?php echo (count($customer_groups) > 1 ? 'block' : 'none'); ?>;">
                 <label class="control-label"><?php echo $entry_customer_group; ?></label>
                 <?php foreach ($customer_groups as $customer_group) { ?>
@@ -46,11 +45,6 @@
                     <input type="text" name="telephone" value="" placeholder="<?php echo $entry_telephone; ?>" id="input-payment-telephone" class="form-control" />
                 </div>
             </div>
-
-            <!-- <div class="form-group">
-                <label class="control-label" for="input-payment-fax"><?php //echo $entry_fax; ?></label>
-                <input type="text" name="fax" value="" placeholder="<?php //echo $entry_fax; ?>" id="input-payment-fax" class="form-control" />
-            </div> -->
 
             <?php foreach ($custom_fields as $custom_field) { ?>
                 <?php if ($custom_field['location'] == 'account') { ?>
@@ -161,20 +155,8 @@
         </fieldset>
     </div>
 
-
-
-
-
-
-
     <div class="col-sm-12">
         <fieldset id="address">
-            <!-- <legend><?php //echo $text_your_address; ?></legend> -->
-            <!-- <div class="form-group">
-                <label class="control-label" for="input-payment-company"><?php //echo $entry_company; ?></label>
-                <input type="text" name="company" value="" placeholder="<?php //echo $entry_company; ?>" id="input-payment-company" class="form-control" />
-            </div> -->
-
             <div class="form-group">
                 <label class="required" for="input-payment-address-1"><?php echo $entry_address_1; ?></label>
                 <input type="text" name="address_1" value="" placeholder="<?php echo $entry_address_1; ?>" id="input-payment-address-1" class="form-control" />
@@ -328,6 +310,7 @@
 
         <fieldset>
 
+            <!-- Make it official checkbox -->
             <div class="checkbox">
                 <label for="register-checkbox">
                     <input type="checkbox" name="register" value="1" id="register-checkbox" />
@@ -335,8 +318,8 @@
                 </label>
             </div>
 
-            <!-- <legend><?php //echo $text_your_password; ?></legend> -->
-            <div class="form-group row" style="display: none;">
+            <!-- Registration password input -->
+            <div class="form-group row password-input" style="display: none;">
                 <div class="col-sm-6">
                     <label class="required" for="input-payment-password"><?php echo $entry_password; ?></label>
                     <input type="password" name="password" value="" placeholder="<?php echo $entry_password; ?>" id="input-payment-password" class="form-control" />
@@ -353,6 +336,7 @@
     </div>
 </div>
 
+<!-- Join our newsletter checkbox -->
 <div class="checkbox">
     <label for="newsletter">
         <input type="checkbox" name="newsletter" value="1" id="newsletter" />
@@ -360,6 +344,8 @@
     </label>
 </div>
 
+
+<!--  Deliver to the same address checkbox -->
 <?php if ($shipping_required) { ?>
     <div class="checkbox">
         <label>
@@ -369,28 +355,29 @@
     </div>
 <?php } ?>
 
+
 <?php if ($text_agree) { ?>
-    <div class="checkbox">
+    <!-- <div class="checkbox">
         <label>
             <input type="checkbox" name="agree" value="1" />
-            <?php echo $text_agree; ?>
+            <?php //echo $text_agree; ?>
         </label>
     </div>
 
     <div class="buttons clearfix">
         <div class="pull-right">
-            <input type="button" value="<?php echo $button_continue; ?>" id="button-register" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary" />
+            <input type="button" value="<?php //echo $button_continue; ?>" id="button-register" data-loading-text="<?php //echo $text_loading; ?>" class="btn btn-primary" />
         </div>
-    </div>
+    </div> -->
 <?php } else { ?>
-    <div class="buttons clearfix">
+    <!-- <div class="buttons clearfix">
         <div class="pull-right">
-            <input type="button" value="<?php echo $button_continue; ?>" id="button-register" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary" />
+            <input type="button" value="<?php //echo $button_continue; ?>" id="button-register" data-loading-text="<?php //echo $text_loading; ?>" class="btn btn-primary" />
         </div>
-    </div>
+    </div> -->
 <?php } ?>
 
-<script type="text/javascript"><!--
+<script type="text/javascript">
 // Sort the custom fields
 $('#account .form-group[data-sort]').detach().each(function() {
     if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#account .form-group').length) {
@@ -428,8 +415,14 @@ $('#address .form-group[data-sort]').detach().each(function() {
     }
 });
 
+// Display the password input when "Make it Official" is checked
 $('#collapse-payment-address input[name=\'register\']').on('change', function() {
+    if ($(this).is(':checked')) {
+        $('.password-input').show();
+        return;
+    }
 
+    $('.password-input').hide();
 });
 
 $('#collapse-payment-address input[name=\'customer_group_id\']').on('change', function() {
@@ -457,8 +450,9 @@ $('#collapse-payment-address input[name=\'customer_group_id\']').on('change', fu
 });
 
 $('#collapse-payment-address input[name=\'customer_group_id\']:checked').trigger('change');
-//--></script>
-<script type="text/javascript"><!--
+</script>
+
+<script type="text/javascript">
 $('#collapse-payment-address button[id^=\'button-payment-custom-field\']').on('click', function() {
     var node = this;
 
